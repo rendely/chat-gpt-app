@@ -19,12 +19,12 @@ intro = """
 (:   _) \ (:  (  )  :)/   /  \\  \\:  |   (:   _(  _|/|__/ \       \:  |     
  \_______) \__|  |__/(___/    \___)\__|    \_______)(_______)       \__|     
                                                                              
-\n\n\n"""
+\n\n"""
 print(intro)                                                                             
 
 while True:
   try: 
-    input_message = input('-----\nUser:\n-----\n')
+    input_message = input('\n-----\nUser:\n-----\n')
   except KeyboardInterrupt:
     print('\n----------\nAssistant:\n----------')
     print('Good bye!')
