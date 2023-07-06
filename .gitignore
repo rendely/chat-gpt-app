@@ -1,0 +1,30 @@
+# Compiled Python files
+*.pyc
+
+# Caches, logs, and temporary files
+__pycache__/
+*.log
+*.tmp
+
+# Virtual environments
+venv/
+env/
+
+# Environment-specific settings
+.env
+
+# IDE-specific files and directories
+.idea/
+.vscode/
+
+# Dependency directories
+lib/
+libs/
+bin/
+build/
+dist/
+
+# Miscellaneous
+*.swp
+*~
+.DS_Store
