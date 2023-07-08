@@ -5,6 +5,8 @@ import { useEffect, useState, useRef } from 'react';
 function App() {
   const [authToken, setAuthToken] = useState('');
   const [message, setMessage] = useState('');
+  const [model, setModel] = useState('gpt-3.5-turbo');
+
   const [messages, setMessages] = useState([
     { "role": "system", "content": "You are a helpful, concise assistant." }
   ]);
@@ -32,7 +34,7 @@ function App() {
     if (messages[messages.length - 1].role !== 'user') return
     const url = "https://api.openai.com/v1/chat/completions";
     let data = {
-      "model": "gpt-3.5-turbo",
+      "model": model,
       "messages": messages,
       "stream": true
     }
@@ -90,6 +92,9 @@ function App() {
     console.log("Updated auth token");
   }
 
+  function handleModelChange(e){
+    setModel(e.target.value)
+  }
   return (
     <div className="App" style={{maxWidth: '800px', margin: 'auto'}}>
       <header className="App-header">
@@ -98,6 +103,25 @@ function App() {
           <input type='text' autoComplete="off" name='auth'></input>
           <div><button type='submit' style={{ width: '100px' }}>Update auth</button></div>
         </form>
+        <form name='model' onChange={handleModelChange}>
+        <input type="radio" name="model" value="gpt-3.5-turbo" id="model-3"
+        checked={model === 'gpt-3.5-turbo'}
+        onChange={handleModelChange}
+        ></input>
+        <label>gpt-3.5-turbo</label>
+        <input type="radio" name="model" value="gpt-3.5-turbo-16k" id="model-3"
+        checked={model === 'gpt-3.5-turbo-16k'}
+        onChange={handleModelChange}
+        ></input>
+        <label>gpt-3.5-turbo-16k</label>
+
+        <input type="radio" name="model" value="gpt-4" id="model-4"
+        checked={model === 'gpt-4'}
+        onChange={handleModelChange}
+        ></input>
+        <label>gpt-4</label>
+        </form>
+        
       </header>
       <div style={{ marginBottom: '100px' }} >
         {[...messages, liveReply].slice(1).map((m, idx) => m.content !== '' ? (
