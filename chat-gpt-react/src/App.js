@@ -101,12 +101,12 @@ function App() {
           {/* {liveReply.length > 0 ? `assistant: ${liveReply}` : null} */}
         </div>
       </div>
+        <form name='chat' onSubmit={handleSubmit} style={{height: '100px'}}>
         <div className='container'>
-        <form name='chat' onSubmit={handleSubmit}>
-          <input autoComplete="off" onChange={handleChange} name='message' type='text' value={message}></input>
-          <button type='submit'>Send</button>
-        </form>
+          <textarea style={{height: '100px'}} autoComplete="off" onChange={handleChange} name='message' type='text' value={message}></textarea>
+          <button style={{height: '100px'}} type='submit'>Send</button>
         </div>
+        </form>
     </div>
   );
 }

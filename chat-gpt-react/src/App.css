@@ -15,7 +15,6 @@
 
 .App .container{
   display: flex;
-  flex-direction: column;
   padding: 100px;
   max-width: 700px;
   text-align: left;
@@ -44,10 +43,10 @@
   color: #61dafb;
 }
 
-.App input{
+.App input, textarea{
   width: 80%;
 }
 
 .App button{
-  width: 15%;
+  width: 20%;
 }
