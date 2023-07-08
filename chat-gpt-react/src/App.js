@@ -91,7 +91,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App" style={{maxWidth: '800px', margin: 'auto'}}>
       <header className="App-header">
         Chat GPT
         <form name='auth' onSubmit={handleAuthSubmit} style={{ width: '400px' }}>
@@ -111,7 +111,7 @@ function App() {
         ) : null)}
       </div>
       <form name='chat' onSubmit={handleSubmit}>
-        <div style={{ height: '100px', width: '100%', position: 'fixed', bottom: '0px', display: 'flex' }}>
+        <div style={{ height: '100px', width: '100%', maxWidth: '800px', position: 'fixed', bottom: '0px', display: 'flex' }}>
           <textarea style={{ flexGrow: 1 }} autoComplete="off" onChange={handleChange} name='message' type='text' value={message}></textarea>
           <button style={{ width: '100px' }} type='submit'>Send</button>
         </div>
