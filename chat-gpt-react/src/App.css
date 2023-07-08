@@ -13,41 +13,7 @@
   padding: 50px;
 }
 
-.App .container{
-  display: flex;
-  padding-bottom: 120px;
-  max-width: 700px;
-  text-align: left;
-  margin: auto;
-}
-
-.message{
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 10px;
-  width: 100%;
-}
-
-.role{
-  width: 100px;
-}
 
 .user{
-  background-color: antiquewhite;
-}
-
-.content{
-  width: 100%;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-.App input, textarea{
-  width: 80%;
-}
-
-.App button{
-  width: 20%;
+  background-color: rgb(223, 223, 223);
 }

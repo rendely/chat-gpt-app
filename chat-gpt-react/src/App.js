@@ -1,6 +1,6 @@
 import './App.css';
 import { SSE } from 'sse.js';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 function App() {
   const [authToken, setAuthToken] = useState('');
@@ -9,6 +9,14 @@ function App() {
     { "role": "system", "content": "You are a helpful, concise assistant." }
   ]);
   const [liveReply, setLiveReply] = useState({ "role": "assistant", "content": "" });
+  const scrollRef = useRef();
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: 'instant', block: 'start' });
+    }
+
+  }, [liveReply, messages])
 
   useEffect(() => {
     let localStorageAuthToken = localStorage.getItem('authToken');
@@ -60,6 +68,7 @@ function App() {
 
     source.stream();
 
+
   }, [messages])
 
   function handleSubmit(e) {
@@ -90,26 +99,24 @@ function App() {
           <div><button type='submit' style={{ width: '100px' }}>Update auth</button></div>
         </form>
       </header>
-      <div className='container'>
-        <div className='chats'>
-          {[...messages, liveReply].slice(1).map((m, idx) => m.content !== '' ? (
-            <div className={`message ${m.role === 'user' && 'user'}`} key={idx}>
-              <div className='role'>{m.role}:</div>
-              <div className='content'>
-                {/* {m.content.replace('\n', '</br>')} */}
-                {m.content.split('\n').map((line, index) => (<div key={index}>{line}</div>))}
-              </div>
+      <div style={{ marginBottom: '100px' }} >
+        {[...messages, liveReply].slice(1).map((m, idx) => m.content !== '' ? (
+          <div className={`message ${m.role === 'user' && 'user'}`} key={idx}
+            style={{ display: 'flex', paddingBottom: '20px', paddingTop: '20px' }}>
+            <div style={{ width: '100px', textAlign: 'right', paddingRight: '30px' }}> {m.role}</div>
+            <div style={{ flexGrow: 1, maxWidth: '66%', textAlign: 'left' }}>
+              {m.content.split('\n').map((line, index) => (<div key={index}>{line}</div>))}
             </div>
-          ) : null)}
-          {/* {liveReply.length > 0 ? `assistant: ${liveReply}` : null} */}
-        </div>
+          </div>
+        ) : null)}
       </div>
-      <form name='chat' onSubmit={handleSubmit} style={{ height: '100px', width: '100%', position: 'fixed', bottom: '0px', margin: 'auto'}}>
-        <div className='container'>
-          <textarea style={{ height: '100px' }} autoComplete="off" onChange={handleChange} name='message' type='text' value={message}></textarea>
-          <button style={{ height: '100px' }} type='submit'>Send</button>
+      <form name='chat' onSubmit={handleSubmit}>
+        <div style={{ height: '100px', width: '100%', position: 'fixed', bottom: '0px', display: 'flex' }}>
+          <textarea style={{ flexGrow: 1 }} autoComplete="off" onChange={handleChange} name='message' type='text' value={message}></textarea>
+          <button style={{ width: '100px' }} type='submit'>Send</button>
         </div>
       </form>
+      <div ref={scrollRef}></div>
     </div>
   );
 }
