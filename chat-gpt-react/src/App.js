@@ -85,28 +85,31 @@ function App() {
     <div className="App">
       <header className="App-header">
         Chat GPT
-        <form name='auth' onSubmit={handleAuthSubmit} style={{width: '400px'}}>
+        <form name='auth' onSubmit={handleAuthSubmit} style={{ width: '400px' }}>
           <input type='text' autoComplete="off" name='auth'></input>
-          <div><button type='submit' style={{width: '100px'}}>Update auth</button></div>
+          <div><button type='submit' style={{ width: '100px' }}>Update auth</button></div>
         </form>
       </header>
       <div className='container'>
         <div className='chats'>
           {[...messages, liveReply].slice(1).map((m, idx) => m.content !== '' ? (
-            <div className={`message ${m.role == 'user' && 'user'}`} key={idx}>
+            <div className={`message ${m.role === 'user' && 'user'}`} key={idx}>
               <div className='role'>{m.role}:</div>
-              <div className='content'>{m.content}</div>
+              <div className='content'>
+                {/* {m.content.replace('\n', '</br>')} */}
+                {m.content.split('\n').map((line, index) => (<div key={index}>{line}</div>))}
+              </div>
             </div>
           ) : null)}
           {/* {liveReply.length > 0 ? `assistant: ${liveReply}` : null} */}
         </div>
       </div>
-        <form name='chat' onSubmit={handleSubmit} style={{height: '100px'}}>
+      <form name='chat' onSubmit={handleSubmit} style={{ height: '100px', width: '100%', position: 'fixed', bottom: '0px', margin: 'auto'}}>
         <div className='container'>
-          <textarea style={{height: '100px'}} autoComplete="off" onChange={handleChange} name='message' type='text' value={message}></textarea>
-          <button style={{height: '100px'}} type='submit'>Send</button>
+          <textarea style={{ height: '100px' }} autoComplete="off" onChange={handleChange} name='message' type='text' value={message}></textarea>
+          <button style={{ height: '100px' }} type='submit'>Send</button>
         </div>
-        </form>
+      </form>
     </div>
   );
 }
