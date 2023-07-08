@@ -17,6 +17,26 @@
   padding: 100px;
   max-width: 700px;
   text-align: left;
+  margin: auto;
+}
+
+
+.message{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.role{
+  width: 100px;
+}
+
+.user{
+  background-color: antiquewhite;
+}
+
+.content{
+  width: 100%;
 }
 
 .App-link {

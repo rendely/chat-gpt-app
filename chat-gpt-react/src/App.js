@@ -8,7 +8,7 @@ function App() {
   const [messages, setMessages] = useState([
     {"role": "system", "content": "You are a helpful, concise assistant."}
     ]);
-  const [liveReply, setLiveReply] = useState('');
+  const [liveReply, setLiveReply] = useState({"role": "assistant", "content": ""});
 
   useEffect(() => {
     let reply = '';
@@ -35,12 +35,12 @@ function App() {
         let text = payload.choices[0].delta.content;
         if (text !== undefined && text !== "\n") {
           reply += text;
-          setLiveReply(reply);
+          setLiveReply({...liveReply, content: reply});
         }
       } else {
         setMessages(currMessages => [...currMessages,
           {"role": "assistant", "content": reply}]);
-        setLiveReply('');
+          setLiveReply({...liveReply, content: ''});
         source.close();
       }
     });
@@ -72,10 +72,13 @@ function App() {
       <div className='container'>
         
         <div className='chats'>
-        {messages.slice(1).map((m, idx) => (
-          <div key={idx}>{m.role}: {m.content}</div>
-        ))}
-        {liveReply.length > 0 ? `assistant: ${liveReply}` : null}
+        {[...messages, liveReply].slice(1).map((m, idx) => m.content !== '' ? (
+          <div className={`message ${m.role=='user' && 'user'}`} key={idx}>
+            <div className='role'>{m.role}:</div>
+            <div className='content'>{m.content}</div>
+          </div>
+        ): null)}
+        {/* {liveReply.length > 0 ? `assistant: ${liveReply}` : null} */}
         </div>
         <form onSubmit={handleSubmit}>
         <input onChange={handleChange} name='message' type='text' value={message}></input>
