@@ -10,16 +10,17 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  padding: 100px;
+  padding: 50px;
 }
 
 .App .container{
+  display: flex;
+  flex-direction: column;
   padding: 100px;
   max-width: 700px;
   text-align: left;
   margin: auto;
 }
-
 
 .message{
   display: flex;
@@ -45,4 +46,8 @@
 
 .App input{
   width: 80%;
+}
+
+.App button{
+  width: 15%;
 }
