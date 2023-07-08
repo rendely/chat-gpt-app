@@ -4,18 +4,16 @@ import {useEffect, useState} from 'react';
 
 function App() {
 
-  const [message, setMessage] = useState('init');
+  const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([
-    {"role": "system", "content": "You are a helpful, concise assistant."}, 
-    {"role": "user", "content": message}
-    ])
+    {"role": "system", "content": "You are a helpful, concise assistant."}
+    ]);
+  const [liveReply, setLiveReply] = useState('');
 
   useEffect(() => {
     let reply = '';
-    if (message === 'init') return 
-    let url = "https://api.openai.com/v1/chat/completions";
-   
-
+    if (messages[messages.length -1].role !== 'user') return 
+    const url = "https://api.openai.com/v1/chat/completions";
     let data = {
       "model": "gpt-3.5-turbo",
       "messages": messages,
@@ -37,38 +35,34 @@ function App() {
         let text = payload.choices[0].delta.content;
         if (text !== undefined && text !== "\n") {
           reply += text;
-          console.log("Text: " + text);
-          console.log(reply)
+          setLiveReply(reply);
         }
       } else {
+        setMessages(currMessages => [...currMessages,
+          {"role": "assistant", "content": reply}]);
+        setLiveReply('');
         source.close();
       }
     });
 
     source.addEventListener("readystatechange", (e) => {
-      if (e.readyState >= 2) {
-        console.log('ready state change')
-        console.log(reply);
-        setMessages(currMessages => [...currMessages,
-          {"role": "assistant", "content": reply}]
-        );
-      }
+      if (e.readyState >= 2) console.log('ready state change')
     });
 
     source.stream();
 
-  },[message]);
+  },[messages])
 
   function handleSubmit(e){
-    e.preventDefault();    
+    e.preventDefault();
     setMessages(currMessages => [...currMessages,
-      {"role": "user", "content": e.target['message'].value}]
-    )
-    setMessage(e.target['message'].value);
-    e.target['message'].value = '';
+      {"role": "user", "content": message}])
+    setMessage('');
   }
 
-  console.log(messages);
+  function handleChange(e){
+    setMessage(e.target.form['message'].value)
+  }
 
   return (
     <div className="App">
@@ -76,15 +70,17 @@ function App() {
         Chat GPT
       </header>
       <div className='container'>
-        <form onSubmit={handleSubmit}>
-        <input name='message' type='text'></input>
-        <button type='submit'>Send</button>
-        </form>
+        
         <div className='chats'>
-        {messages.map((m, idx) => (
+        {messages.slice(1).map((m, idx) => (
           <div key={idx}>{m.role}: {m.content}</div>
         ))}
+        {liveReply.length > 0 ? `assistant: ${liveReply}` : null}
         </div>
+        <form onSubmit={handleSubmit}>
+        <input onChange={handleChange} name='message' type='text' value={message}></input>
+        <button type='submit'>Send</button>
+        </form>
       </div>
     </div>
   );
