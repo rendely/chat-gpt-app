@@ -96,9 +96,9 @@ function App() {
     setModel(e.target.value)
   }
   return (
-    <div className="App" style={{maxWidth: '800px', margin: 'auto'}}>
+    <div className="App" >
       <header className="App-header">
-        Chat GPT
+        <h1>Homemade Chat GPT</h1>
         <form name='auth' onSubmit={handleAuthSubmit} style={{ width: '400px' }}>
           <input type='text' autoComplete="off" name='auth'></input>
           <div><button type='submit' style={{ width: '100px' }}>Update auth</button></div>
@@ -123,7 +123,8 @@ function App() {
         </form>
         
       </header>
-      <div style={{ marginBottom: '100px' }} >
+      <div style={{maxWidth: '800px', margin: 'auto'}}>
+      <div style={{ marginBottom: '150px' }} >
         {[...messages, liveReply].slice(1).map((m, idx) => m.content !== '' ? (
           <div className={`message ${m.role === 'user' && 'user'}`} key={idx}
             style={{ display: 'flex', paddingBottom: '20px', paddingTop: '20px' }}>
@@ -135,12 +136,13 @@ function App() {
         ) : null)}
       </div>
       <form name='chat' onSubmit={handleSubmit}>
-        <div style={{ height: '100px', width: '100%', maxWidth: '800px', position: 'fixed', bottom: '0px', display: 'flex' }}>
-          <textarea style={{ flexGrow: 1 }} autoComplete="off" onChange={handleChange} name='message' type='text' value={message}></textarea>
-          <button style={{ width: '100px' }} type='submit'>Send</button>
+        <div style={{ height: '100px', width: '100%', maxWidth: '800px', position: 'fixed', padding: '20px', bottom: '0px', display: 'flex', backgroundColor: 'white', zIndex: 3 }}>
+          <textarea style={{ flexGrow: 1, marginRight: '10px', borderRadius: '10px', resize: 'none', padding: '10px', outline: 'none', borderColor: 'darkgray'}} autoComplete="off" onChange={handleChange} name='message' type='text' value={message}></textarea>
+          <button style={{ width: '100px', borderRadius: '10px', outline: 'none', borderColor: 'transparent' }} type='submit'>Send</button>
         </div>
       </form>
       <div ref={scrollRef}></div>
+      </div>
     </div>
   );
 }
