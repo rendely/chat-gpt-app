@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 
 function App() {
   const [authToken, setAuthToken] = useState('');
+  const [showAuth, setShowAuth] = useState(true);
   const [message, setMessage] = useState('');
   const [model, setModel] = useState('gpt-3.5-turbo');
 
@@ -25,6 +26,7 @@ function App() {
     let envAuthToken = process.env.REACT_APP_SECRET_KEY;
     if (envAuthToken || localStorageAuthToken) {
       setAuthToken(envAuthToken || localStorageAuthToken);
+      setShowAuth(false);
       localStorage.setItem('authToken', envAuthToken || localStorageAuthToken);
     }
   }, [])
@@ -98,11 +100,13 @@ function App() {
   return (
     <div className="App" >
       <header className="App-header">
-        <h1>Homemade Chat GPT</h1>
+        <h1>ChatGPT via API</h1>
+        {!showAuth ? <button onClick={() => setShowAuth(true)}>Edit auth</button> : 
         <form name='auth' onSubmit={handleAuthSubmit} style={{ width: '400px' }}>
           <input type='text' autoComplete="off" name='auth'></input>
           <div><button type='submit' style={{ width: '100px' }}>Update auth</button></div>
         </form>
+        }
         <form name='model' onChange={handleModelChange}>
         <input type="radio" name="model" value="gpt-3.5-turbo" id="model-3"
         checked={model === 'gpt-3.5-turbo'}
