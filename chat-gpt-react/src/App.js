@@ -8,9 +8,11 @@ function App() {
   const [message, setMessage] = useState('');
   const [model, setModel] = useState('gpt-3.5-turbo');
 
-  const [messages, setMessages] = useState([
+  const defaultMessages = [
     { "role": "system", "content": "You are a helpful, concise assistant." }
-  ]);
+    ]
+  const localMessages = localStorage.getItem('localMessages')
+  const [messages, setMessages] = useState(localMessages ? JSON.parse(localMessages) : defaultMessages);
   const [liveReply, setLiveReply] = useState({ "role": "assistant", "content": "" });
   const scrollRef = useRef();
   const formRef = useRef();
@@ -30,11 +32,13 @@ function App() {
       setShowAuth(false);
       localStorage.setItem('authToken', envAuthToken || localStorageAuthToken);
     }
+    
   }, [])
 
   useEffect(() => {
     let reply = '';
     if (messages[messages.length - 1].role !== 'user') return
+
     const url = "https://api.openai.com/v1/chat/completions";
     let data = {
       "model": model,
@@ -62,7 +66,7 @@ function App() {
       } else {
         setMessages(currMessages => [...currMessages,
         { "role": "assistant", "content": reply }]);
-        setLiveReply({ ...liveReply, content: '' });
+        setLiveReply({ ...liveReply, content: '' });        
         source.close();
       }
     });
@@ -76,8 +80,11 @@ function App() {
 
   }, [messages])
 
+  useEffect(() => localStorage.setItem('localMessages', JSON.stringify(messages)), [messages]);
+
   function handleSubmit(e) {
     e.preventDefault();
+    
     setMessages(currMessages => [...currMessages,
     { "role": "user", "content": message }])
     setMessage('');
@@ -146,11 +153,12 @@ function App() {
             </div>
           </div>
         ) : null)}
-      </div>
+      </div>      
       <form name='chat' onSubmit={handleSubmit} ref={formRef}>
         <div style={{ height: '100px', width: '100%', maxWidth: '800px', position: 'fixed', padding: '10px', bottom: '0px', display: 'flex', backgroundColor: 'white', zIndex: 3, boxSizing: 'border-box'}}>
           <textarea onKeyDown={handleKeyboardShortcuts} style={{ flexGrow: 1, marginRight: '10px', borderRadius: '10px', resize: 'none', padding: '10px', outline: 'none', borderColor: 'darkgray'}} autoComplete="off" onChange={handleChange} name='message' type='text' value={message}></textarea>
-          <button style={{ flexGrow: 1, maxWidth: '100px', borderRadius: '10px', outline: 'none', borderColor: 'transparent',  }} type='submit'>Send <br></br><span style={{fontSize: '0.5rem'}}>(Control + Enter)</span></button>
+          <button style={{ flexGrow: 2, maxWidth: '100px', borderRadius: '10px', marginRight: '10px', outline: 'none', borderColor: 'transparent',  }} type='submit'>Send <br></br><span style={{fontSize: '0.5rem'}}>(Control + Enter)</span></button>
+          <button style={{ flexGrow: 1, maxWidth: '50px', borderRadius: '10px', outline: 'none', borderColor: 'transparent',  }} onClick={() => setMessages(defaultMessages) } type='button'>Clear</button>
         </div>
       </form>
       <div ref={scrollRef}></div>
