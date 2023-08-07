@@ -6,7 +6,10 @@ function App() {
   const [authToken, setAuthToken] = useState('');
   const [showAuth, setShowAuth] = useState(true);
   const [message, setMessage] = useState('');
-  const [model, setModel] = useState('gpt-3.5-turbo');
+
+  const localModel = localStorage.getItem('localModel');
+
+  const [model, setModel] = useState(localModel ? localModel : 'gpt-3.5-turbo');
 
   const defaultMessages = [
     { "role": "system", "content": "You are a helpful, concise assistant." }
@@ -17,6 +20,8 @@ function App() {
   const scrollRef = useRef();
   const formRef = useRef();
 
+  useEffect(() => localStorage.setItem('localModel', model), [model]);
+  
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: 'instant', block: 'start' });
@@ -123,22 +128,24 @@ function App() {
         </form>
         }
         <form name='model' onChange={handleModelChange}>
-        <input type="radio" name="model" value="gpt-3.5-turbo" id="model-3"
-        checked={model === 'gpt-3.5-turbo'}
-        onChange={handleModelChange}
-        ></input>
-        <label>gpt-3.5-turbo</label>
-        <input type="radio" name="model" value="gpt-3.5-turbo-16k" id="model-3"
-        checked={model === 'gpt-3.5-turbo-16k'}
-        onChange={handleModelChange}
-        ></input>
-        <label>gpt-3.5-turbo-16k</label>
+            
+          <label><input type="radio" name="model" value="gpt-3.5-turbo" id="model-3"
+          checked={model === 'gpt-3.5-turbo'}
+          onChange={handleModelChange}
+          ></input>
+          gpt-3.5-turbo</label>
 
-        <input type="radio" name="model" value="gpt-4" id="model-4"
-        checked={model === 'gpt-4'}
-        onChange={handleModelChange}
-        ></input>
-        <label>gpt-4</label>
+          <label><input type="radio" name="model" value="gpt-3.5-turbo-16k" id="model-3_5"
+          checked={model === 'gpt-3.5-turbo-16k'}
+          onChange={handleModelChange}
+          ></input>
+          gpt-3.5-turbo-16k</label>
+
+          <label><input type="radio" name="model" value="gpt-4" id="model-4"
+          checked={model === 'gpt-4'}
+          onChange={handleModelChange}
+          ></input>
+          gpt-4</label>
         </form>
         
       </header>
