@@ -13,6 +13,7 @@ function App() {
   ]);
   const [liveReply, setLiveReply] = useState({ "role": "assistant", "content": "" });
   const scrollRef = useRef();
+  const formRef = useRef();
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -91,11 +92,18 @@ function App() {
     let newAuthToken = e.target['auth'].value;
     localStorage.setItem('authToken', newAuthToken);
     setAuthToken(newAuthToken);
+    setShowAuth(false);
     console.log("Updated auth token");
   }
 
   function handleModelChange(e){
     setModel(e.target.value)
+  }
+
+  function handleKeyboardShortcuts(e){
+    if (e.code === 'Enter' && e.ctrlKey){
+      handleSubmit(e);
+    }
   }
   return (
     <div className="App" >
@@ -139,10 +147,10 @@ function App() {
           </div>
         ) : null)}
       </div>
-      <form name='chat' onSubmit={handleSubmit}>
-        <div style={{ height: '100px', width: '100%', maxWidth: '800px', position: 'fixed', padding: '20px', bottom: '0px', display: 'flex', backgroundColor: 'white', zIndex: 3 }}>
-          <textarea style={{ flexGrow: 1, marginRight: '10px', borderRadius: '10px', resize: 'none', padding: '10px', outline: 'none', borderColor: 'darkgray'}} autoComplete="off" onChange={handleChange} name='message' type='text' value={message}></textarea>
-          <button style={{ width: '100px', borderRadius: '10px', outline: 'none', borderColor: 'transparent' }} type='submit'>Send</button>
+      <form name='chat' onSubmit={handleSubmit} ref={formRef}>
+        <div style={{ height: '100px', width: '100%', maxWidth: '800px', position: 'fixed', padding: '10px', bottom: '0px', display: 'flex', backgroundColor: 'white', zIndex: 3, boxSizing: 'border-box'}}>
+          <textarea onKeyDown={handleKeyboardShortcuts} style={{ flexGrow: 1, marginRight: '10px', borderRadius: '10px', resize: 'none', padding: '10px', outline: 'none', borderColor: 'darkgray'}} autoComplete="off" onChange={handleChange} name='message' type='text' value={message}></textarea>
+          <button style={{ flexGrow: 1, maxWidth: '100px', borderRadius: '10px', outline: 'none', borderColor: 'transparent',  }} type='submit'>Send <br></br><span style={{fontSize: '0.5rem'}}>(Control + Enter)</span></button>
         </div>
       </form>
       <div ref={scrollRef}></div>
