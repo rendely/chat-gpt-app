@@ -120,6 +120,13 @@ function App() {
 
   function handleImage(){
     console.log('Input:',message);
+    setMessages(curr => [...curr, 
+      { "role": "user", "content": "Generate images of "+message},
+      { "role": "assistant", "content": "Working on it..."}
+    ]);
+
+    setMessage('');
+
     fetch('https://api.openai.com/v1/images/generations', {
       method: 'POST',
       headers: {
