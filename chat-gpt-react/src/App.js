@@ -117,6 +117,34 @@ function App() {
       handleSubmit(e);
     }
   }
+
+  function handleImage(){
+    console.log('Input:',message);
+    fetch('https://api.openai.com/v1/images/generations', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: authToken,
+      },
+      body: JSON.stringify({
+        "model": "dall-e-3",
+        "prompt": message,
+        "n": 1,
+        "size": "1024x1024"
+      })
+    })
+    .then(r => r.json())
+    .then(d => {
+      console.log(d);
+      setMessages(curr => [...curr, 
+        { "role": "assistant", "content": d['data'][0]['revised_prompt'] },
+        { "role": "assistant", "content": d['data'][0]['url'] },
+      ]);
+    })
+
+  }
+
+
   return (
     <div className="App" >
       <header className="App-header">
@@ -156,7 +184,9 @@ function App() {
             style={{ display: 'flex', paddingBottom: '20px', paddingTop: '20px' }}>
             <div style={{ width: '100px', textAlign: 'right', paddingRight: '30px' }}> {m.role}</div>
             <div style={{ flexGrow: 1, maxWidth: '66%', textAlign: 'left' }}>
-              {m.content.split('\n').map((line, index) => (<div key={index}>{line}</div>))}
+              {m.content.split('\n').map((line, index) => (<div key={index}>{ line.match('oaidalleapi') ?
+              <img src={line} width="100%"/>
+               : line}</div>))}
             </div>
           </div>
         ) : null)}
@@ -165,6 +195,11 @@ function App() {
         <div style={{ height: '100px', width: '100%', maxWidth: '800px', position: 'fixed', padding: '10px', bottom: '0px', display: 'flex', backgroundColor: 'white', zIndex: 3, boxSizing: 'border-box'}}>
           <textarea onKeyDown={handleKeyboardShortcuts} style={{ flexGrow: 1, marginRight: '10px', borderRadius: '10px', resize: 'none', padding: '10px', outline: 'none', borderColor: 'darkgray'}} autoComplete="off" onChange={handleChange} name='message' type='text' value={message}></textarea>
           <button style={{ flexGrow: 2, maxWidth: '100px', borderRadius: '10px', marginRight: '10px', outline: 'none', borderColor: 'transparent',  }} type='submit'>Send <br></br><span style={{fontSize: '0.5rem'}}>(Control + Enter)</span></button>
+
+          <button style={{ flexGrow: 2, maxWidth: '100px', borderRadius: '10px', marginRight: '10px', outline: 'none', borderColor: 'transparent',  }} type='button'
+          onClick={handleImage}
+          >Image</button>
+
           <button style={{ flexGrow: 1, maxWidth: '50px', borderRadius: '10px', outline: 'none', borderColor: 'transparent',  }} onClick={() => setMessages(defaultMessages) } type='button'>Clear</button>
         </div>
       </form>
