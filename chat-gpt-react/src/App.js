@@ -176,11 +176,11 @@ function App() {
           ></input>
           gpt-3.5-turbo-16k</label>
 
-          <label><input type="radio" name="model" value="gpt-4" id="model-4"
-          checked={model === 'gpt-4'}
+          <label><input type="radio" name="model" value="gpt-4-turbo-preview" id="model-4"
+          checked={model === 'gpt-4-turbo-preview'}
           onChange={handleModelChange}
           ></input>
-          gpt-4</label>
+          gpt-4-turbo</label>
         </form>
         
       </header>
