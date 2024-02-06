@@ -197,17 +197,7 @@ function App() {
               <div style={{ flexGrow: 1, maxWidth: '66%', textAlign: 'left' }}>
                 {m.content.split('\n').map((line, index) => (<div key={index}>{line.match('oaidalleapi') ?
                   <img src={line} width="100%" />
-                  : (
-                    <>
-                      {line.match('^# ') ? (
-                        <h1>{line.substring(2)}</h1>
-                      ) : line.match('^## ') ? (
-                        <h2>{line.substring(3)}</h2>
-                      ) : line.match('^- ') ? (
-                        <li>{line.substring(2)}</li>
-                      ) : (
-                        line)}
-                    </>)
+                  : line 
                 }</div>))}
               </div>
             </div>
