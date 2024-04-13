@@ -10,11 +10,11 @@
 .inputText{
     height: 100%;
     width: 100%;
-    padding: 10px;
+    
     border: none;
     outline: none;
     background-color: transparent;
     color: rgb(220, 220, 220);
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     resize: none;
 }
