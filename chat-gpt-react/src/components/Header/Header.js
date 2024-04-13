@@ -1,14 +1,21 @@
 import {useState} from 'react';
 import './Header.css';
-import Config from '../Config/Config'
+import Config from './Config/Config'
 
 function Header(){
 
   const [showConfig, setShowConfig] = useState(false);
 
   return (
-    <div class='Header' onClick={() => setShowConfig(curr => !curr)}>
-      ⚙️
+    <div>
+      <div class='top' onClick={() => setShowConfig(curr => !curr)}>
+        <div class='side'></div>
+        <div class='center'>
+        {showConfig? <span>Settings </span>: null}
+        </div>
+        <div class='side'>⚙️</div>
+      </div>
+      
       {showConfig? <Config /> : null}
     </div>
   )
