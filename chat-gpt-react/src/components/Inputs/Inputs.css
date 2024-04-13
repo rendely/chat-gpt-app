@@ -3,4 +3,6 @@
     flex-grow: 1;
     align-items: center;
     justify-content: center;
+    max-height: 100px;
+    background-color: rgb(88, 81, 70);
 }
