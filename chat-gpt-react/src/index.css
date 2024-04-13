@@ -15,3 +15,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.root{
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  width: 100%;
+}
