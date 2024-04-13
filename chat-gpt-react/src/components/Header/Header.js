@@ -16,7 +16,7 @@ function Header(){
         <div class='side'>⚙️</div>
       </div>
       
-      {showConfig? <Config /> : null}
+      <Config showConfig={showConfig}/>
     </div>
   )
 }

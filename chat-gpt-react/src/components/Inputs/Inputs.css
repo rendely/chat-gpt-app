@@ -4,5 +4,17 @@
     align-items: center;
     justify-content: center;
     max-height: 100px;
-    background-color: rgb(88, 81, 70);
+    /* background-color: rgb(88, 81, 70); */
+}
+
+.inputText{
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: rgb(220, 220, 220);
+    font-size: 1.2rem;
+    resize: none;
 }

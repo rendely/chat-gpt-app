@@ -1,8 +1,12 @@
 import React from 'react';
 import './Config.css';
 
-function Config(){
-  return (<div class='Config'>config</div>)
+function Config({showConfig}){
+  return (<div class={`Config ${showConfig? null :'close'}`}>
+    {showConfig?
+    <span>Hi</span>
+  :null}
+  </div>)
 }
 
 export default Config

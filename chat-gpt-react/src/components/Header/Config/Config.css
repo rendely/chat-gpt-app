@@ -7,5 +7,10 @@
     z-index: 2;
     background-color: rgb(80,80,80);
     align-items: center;
-    justify-content: center;
+    justify-content: center;;
+    transition: height 0.3s;
+}
+
+.Config.close{
+    height: 0;
 }
