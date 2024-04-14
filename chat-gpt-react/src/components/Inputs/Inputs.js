@@ -7,10 +7,8 @@ function Inputs({configs, updateConfigs, updateLiveReply}){
   
   const inputRef = useRef()
 
-  function updateMessages(role, message){
-    updateConfigs({...configs, messages: [...configs.messages, {
-      role: role, content: message
-    }]});
+  function updateMessages(newMessages){
+    updateConfigs({...configs, messages: [...configs.messages, ...newMessages]});
     setInput('');
     inputRef.current.focus()
   }
@@ -28,7 +26,7 @@ function Inputs({configs, updateConfigs, updateLiveReply}){
     if (configs.messages.length < 2) return
     if (configs.messages[configs.messages.length -1].role !== 'user') return
 
-    updateMessages('assistant', '...');
+    updateMessages([{role:'assistant', content:'...'}]);
 
     const url = "https://api.openai.com/v1/chat/completions";
     let data = {
@@ -59,7 +57,7 @@ function Inputs({configs, updateConfigs, updateLiveReply}){
         })
 
       } else {
-        updateMessages('assistant',reply);
+        updateMessages([{role: 'assistant',content: reply}]);
         source.close();
       }
     });
@@ -71,11 +69,13 @@ function Inputs({configs, updateConfigs, updateLiveReply}){
     source.stream();
 
 
-  }, [configs.key])
+  }, [configs.messages])
 
   function handleImage() {
-    updateMessages('user', 'Generate image of ' + input);
-    // updateMessages('assistant', 'Working on it...');
+    updateMessages([
+      {role: 'user', content: 'Generate image of ' + input},
+      {role: 'assistant', content: 'Working on it...'}
+    ]);
 
 
     fetch('https://api.openai.com/v1/images/generations', {
@@ -93,8 +93,10 @@ function Inputs({configs, updateConfigs, updateLiveReply}){
     })
       .then(r => r.json())
       .then(d => {
-        updateMessages('assistant',d['data'][0]['revised_prompt']);
-        // updateMessages('assistant',d['data'][0]['url']);
+        updateMessages([
+          {role: 'assistant', content: d['data'][0]['revised_prompt']},
+          {role: 'assistant', content: d['data'][0]['url']}
+        ]);
       });
 
   }
@@ -112,7 +114,7 @@ function Inputs({configs, updateConfigs, updateLiveReply}){
       <button 
         className='send button'
         onClick={() => {
-          updateMessages('user', input);          
+          updateMessages([{role: 'user', content: input}]);          
         }}
       >Send</button>
       <button 

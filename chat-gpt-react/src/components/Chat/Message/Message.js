@@ -6,7 +6,7 @@ function Message({role, content}){
       <div className='role'>{role}</div>
       <div className='content'>
       { content.match('oaidalleapi') ?
-      <img src={content} alt='Generated art' width="100%" />
+      <img src={content} alt='Generated art' />
       : <span>{content} </span>
       }
         </div>
