@@ -6,7 +6,7 @@ import Header from './components/Header/Header';
 
 export default function App() {
 
-    const [configs, setConfigs] = useState({model: '3.5', messages: []});
+    const [configs, setConfigs] = useState({model: 'gpt-3.5-turbo', messages: []});
 
     // function to updateConfigs
     function updateConfigs(data){
@@ -22,10 +22,7 @@ export default function App() {
       if (envAuthToken) updateConfigs({key: envAuthToken});
       if (!!configs.messages) setConfigs(curr => ({...curr, messages: 
           [
-            {role: 'user', content: 'hello there'},
-            {role: 'assistant', content: 'how can I help you?'},
-            {role: 'user', content: 'what is 2+2?'},
-            {role: 'assistant', content: 'the answer is 4'},
+            {role: 'system', content: 'You are a concise, helpful assistant'}
           ]
         }));
     },[])

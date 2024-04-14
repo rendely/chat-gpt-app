@@ -26,12 +26,12 @@ function Config({showConfig, configs, updateConfigs}){
       <div className='row heading'>Model:</div>
       <div className='row'>
         <Option 
-          option={{name: 'Chat GPT 3.5', selected: configs.model === '3.5'}} 
-          handleClick={() => handleModelChange('3.5')}
+          option={{name: 'Chat GPT 3.5', selected: configs.model === 'gpt-3.5-turbo'}} 
+          handleClick={() => handleModelChange('gpt-3.5-turbo')}
         />
         <Option 
-          option={{name: 'Chat GPT 4 Vision', selected: configs.model === '4'}} 
-          handleClick={() => handleModelChange('4')}
+          option={{name: 'Chat GPT 4 Vision', selected: configs.model === 'gpt-4-turbo-preview'}} 
+          handleClick={() => handleModelChange('gpt-4-turbo-preview')}
         />
       </div>
     </>
