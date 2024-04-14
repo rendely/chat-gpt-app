@@ -1,20 +1,68 @@
 .Inputs{
     display: flex;
     flex-grow: 1;
+    flex-flow: column;
     align-items: center;
     justify-content: center;
-    max-height: 100px;
+    max-height: 150px;
     /* background-color: rgb(88, 81, 70); */
 }
 
 .inputText{
     height: 100%;
     width: 100%;
-    
+    padding-top: 20px;
     border: none;
     outline: none;
     background-color: transparent;
     color: rgb(220, 220, 220);
     font-size: 1.3rem;
     resize: none;
+    flex-grow: 3;
+}
+
+.buttons {    
+    width: 100%;
+    height: 50px;
+    transition: height 0.3s;
+    margin: 20px 0;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    flex-grow: 1;
+}
+
+
+.buttons.close{
+  height: 0;
+}
+
+@media (min-width: 800px) {
+    .Inputs {
+      flex-flow: row;
+    }
+    .buttons{
+      width: auto;
+      margin: 0;
+    }
+  }
+
+
+.button{
+    padding: 20px;
+    display: flex;
+    flex-grow: 1;
+    height: auto;
+    background-color: rgb(96, 96, 96);
+    border: none;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+.button+.button{
+    margin-left: 20px;
 }

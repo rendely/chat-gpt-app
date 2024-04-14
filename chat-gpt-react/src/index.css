@@ -10,11 +10,14 @@ body {
   align-items: center;
   justify-content: center;
   background-color: rgb(45, 45, 45);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body, textarea, button{
   color: rgb(220, 220, 220);
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
   monospace;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .root{

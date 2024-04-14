@@ -3,21 +3,11 @@ import './Chat.css';
 import Message from './Message/Message'
 
 function Chat(){
-  return (<div class='Chat'>
+  return (<div className='Chat'>
     <Message />
     <Message />
     <Message />
-    <Message />
-    <Message />
-    <Message />
-    <Message />
-    <Message />
-    <Message />
-    <Message />
-    <Message />
-    <Message />
-    <Message />
-    <Message />
+  
   </div>)
 }
 
