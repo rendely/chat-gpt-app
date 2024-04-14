@@ -6,7 +6,7 @@ import Header from './components/Header/Header';
 
 export default function App() {
 
-    const [configs, setConfigs] = useState({model: 'gpt-3.5-turbo', messages: []});
+    const [configs, setConfigs] = useState(tryLocalStorage());
 
     // function to update liveReply
     function updateLiveReply(message){
@@ -28,18 +28,19 @@ export default function App() {
     }
 
     // load configs from local storage
-    useEffect(() => {
+    function tryLocalStorage(){
       // localStorage.removeItem('configs');
-      const localConfigs = localStorage.getItem('configs');
-      if (localConfigs != null) setConfigs(JSON.parse(localConfigs));
-      const envAuthToken = process.env.REACT_APP_SECRET_KEY;
-      if (envAuthToken) updateConfigs({key: envAuthToken});
-      if (!configs.messages || configs.messages.length <= 2) setConfigs(curr => ({...curr, messages: 
-          [
-            {role: 'system', content: 'You are a concise, helpful assistant'}
-          ]
-        }));
-    },[])
+      const localConfigsStr = localStorage.getItem('configs');
+      if (localConfigsStr != null){
+        const localConfigs = JSON.parse(localConfigsStr);
+        const envAuthToken = process.env.REACT_APP_SECRET_KEY;
+        if (envAuthToken) localConfigs.key = envAuthToken;
+        return localConfigs;
+      }
+      else{
+        return {model: 'gpt-3.5-turbo', messages: [{role: 'system', content: 'You are a concise, helpful assistant'}]}
+      }
+    }
 
     // update local storage of configs if they ever change
     useEffect(() => {

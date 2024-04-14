@@ -63,7 +63,7 @@ function Inputs({configs, updateConfigs, updateLiveReply}){
     });
 
     source.addEventListener("readystatechange", (e) => {
-      if (e.readyState >= 2) console.log('ready state change')
+      if (e.readyState >= 2) return
     });
 
     source.stream();
