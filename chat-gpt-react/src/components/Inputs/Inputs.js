@@ -6,7 +6,10 @@ function Inputs(){
   const [input, setInput] = useState('')
 
   return (<div className='Inputs'>
-    <textarea className='inputText' onChange={e => setInput(e.target.value)}>      
+    <textarea 
+      autoFocus
+      className='inputText' 
+      onChange={e => setInput(e.target.value)}>      
     </textarea>
     <div className={`buttons ${input === '' ? 'close' : ''}`}>
       {input === '' ? null : <>

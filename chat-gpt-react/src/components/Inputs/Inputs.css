@@ -54,10 +54,17 @@
     flex-grow: 1;
     height: auto;
     background-color: rgb(96, 96, 96);
+    transition: all 0.3s;
     border: none;
     border-radius: 8px;
     align-items: center;
     justify-content: center;
+    font-weight: 600;
+}
+
+.button:hover{
+  background-color: rgb(55, 47, 62);
+
 }
 
 

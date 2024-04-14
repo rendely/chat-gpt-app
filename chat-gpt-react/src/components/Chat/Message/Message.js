@@ -1,10 +1,10 @@
 import './Message.css';
 
-function Message(){
+function Message({role, content}){
   return (
     <div className='Message'>
-      <div className='role'>User:</div>
-      <div className='content'>Tell me how to use CSS transitions</div>
+      <div className='role'>{role}</div>
+      <div className='content'>{content}</div>
     </div>
   )
 }
