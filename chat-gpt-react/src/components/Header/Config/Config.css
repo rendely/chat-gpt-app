@@ -22,6 +22,7 @@
     flex-flow: column;
     align-items: center;
     justify-content: center;
+    gap: 10px;
 }
 
 @media (min-width: 800px) {
@@ -30,7 +31,10 @@
     }
   }
 
-.row+.row{
+.row.heading{
+    margin-bottom: 10px
+}
+.row+.row.heading{
     margin-top: 30px;
 }
 

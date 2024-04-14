@@ -1,8 +1,11 @@
 import './Option.css';
 
-function Option({option}){
+function Option({option, handleClick}){
   return (
-    <div class={`Option ${option.selected ? 'selected' : ''}`}>
+    <div 
+      className={`Option ${option.selected ? 'selected' : ''}`}
+      onClick={handleClick}
+    >
       {option.name}
     </div>
   )

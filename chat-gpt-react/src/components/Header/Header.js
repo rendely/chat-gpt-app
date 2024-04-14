@@ -2,7 +2,7 @@ import {useState} from 'react';
 import './Header.css';
 import Config from './Config/Config'
 
-function Header(){
+function Header({configs, updateConfigs}){
 
   const [showConfig, setShowConfig] = useState(false);
 
@@ -16,7 +16,7 @@ function Header(){
         <div className='side'>⚙️</div>
       </div>
       
-      <Config showConfig={showConfig}/>
+      <Config showConfig={showConfig} configs={configs} updateConfigs={updateConfigs}/>
     </div>
   )
 }
