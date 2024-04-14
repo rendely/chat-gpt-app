@@ -34,7 +34,7 @@ export default function App() {
       if (localConfigs != null) setConfigs(JSON.parse(localConfigs));
       const envAuthToken = process.env.REACT_APP_SECRET_KEY;
       if (envAuthToken) updateConfigs({key: envAuthToken});
-      if (!configs.messages || configs.messages.length === 1) setConfigs(curr => ({...curr, messages: 
+      if (!configs.messages || configs.messages.length <= 2) setConfigs(curr => ({...curr, messages: 
           [
             {role: 'system', content: 'You are a concise, helpful assistant'}
           ]
