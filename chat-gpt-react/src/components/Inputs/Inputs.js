@@ -1,21 +1,24 @@
 import { SSE } from 'sse.js';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './Inputs.css';
 
 function Inputs({configs, updateConfigs}){
 
   const [liveReply, setLiveReply] = useState('');
+  const inputRef = useRef()
 
   function updateMessages(role, message){
     updateConfigs({...configs, messages: [...configs.messages, {
       role: role, content: message
     }]});
     setInput('');
+    inputRef.current.focus()
   }
 
   function clearMessages(){
     updateConfigs({...configs, messages: configs.messages.slice(0,1)});
     setInput('');
+    inputRef.current.focus()
   }
 
   const [input, setInput] = useState('')
@@ -72,6 +75,7 @@ function Inputs({configs, updateConfigs}){
 
   return (<div className='Inputs'>
     <textarea 
+      ref={inputRef}
       autoFocus
       className='inputText' 
       value={input}
