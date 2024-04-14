@@ -2,9 +2,9 @@ import { SSE } from 'sse.js';
 import { useEffect, useState, useRef } from 'react';
 import './Inputs.css';
 
-function Inputs({configs, updateConfigs}){
+function Inputs({configs, updateConfigs, updateLiveReply}){
 
-  const [liveReply, setLiveReply] = useState('');
+  
   const inputRef = useRef()
 
   function updateMessages(role, message){
@@ -27,6 +27,8 @@ function Inputs({configs, updateConfigs}){
     let reply = '';
     if (configs.messages.length < 2) return
     if (configs.messages[configs.messages.length -1].role !== 'user') return
+
+    updateMessages('assistant', '...');
 
     const url = "https://api.openai.com/v1/chat/completions";
     let data = {
@@ -52,14 +54,12 @@ function Inputs({configs, updateConfigs}){
           let text = p.choices[0].delta.content;
           if (text !== undefined && text !== "\n") {
             reply += text;
-            setLiveReply({ ...liveReply, content: reply });
+            updateLiveReply(reply);
           }
         })
 
       } else {
-        console.log(reply);
         updateMessages('assistant',reply);
-        setLiveReply({ ...liveReply, content: '' });
         source.close();
       }
     });

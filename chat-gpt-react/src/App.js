@@ -8,6 +8,20 @@ export default function App() {
 
     const [configs, setConfigs] = useState({model: 'gpt-3.5-turbo', messages: []});
 
+    // function to update liveReply
+    function updateLiveReply(message){
+      setConfigs(curr => {
+        const messages = curr.messages;
+        const index = messages.length;
+        if (messages[index-1].role === 'assistant'){
+          messages[index-1].content = message;
+          return {...curr, messages:messages}
+        }else{
+          return curr;
+        }
+      })     
+    }
+
     // function to updateConfigs
     function updateConfigs(data){
       setConfigs(curr => ({...curr, ...data}));
@@ -37,7 +51,8 @@ export default function App() {
     <>
        <Header configs={configs} updateConfigs={updateConfigs}/>
        <Chat messages={configs.messages}/>
-       <Inputs configs={configs} updateConfigs={updateConfigs} />
+       <Inputs configs={configs} updateConfigs={updateConfigs} 
+       updateLiveReply={updateLiveReply} />
     </>
     )
 }
