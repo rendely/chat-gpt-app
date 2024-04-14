@@ -9,7 +9,13 @@ function Inputs({configs, updateConfigs}){
   function updateMessages(role, message){
     updateConfigs({...configs, messages: [...configs.messages, {
       role: role, content: message
-    }]})
+    }]});
+    setInput('');
+  }
+
+  function clearMessages(){
+    updateConfigs({...configs, messages: configs.messages.slice(0,1)});
+    setInput('');
   }
 
   const [input, setInput] = useState('')
@@ -48,6 +54,7 @@ function Inputs({configs, updateConfigs}){
         })
 
       } else {
+        console.log(reply);
         updateMessages('assistant',reply);
         setLiveReply({ ...liveReply, content: '' });
         source.close();
@@ -67,17 +74,22 @@ function Inputs({configs, updateConfigs}){
     <textarea 
       autoFocus
       className='inputText' 
+      value={input}
       onChange={e => setInput(e.target.value)}>      
     </textarea>
-    <div className={`buttons ${input === '' ? 'close' : ''}`}>
-      {input === '' ? null : <>
+    <div className={`buttons ${input === '' && configs.messages.length === 1 ? 'close' : ''}`}>
+      {input === '' && configs.messages.length === 1 ? null : <>
       <button 
         className='send button'
-        onClick={() => updateMessages('user','What is 2+2?')}
-      
+        onClick={() => {
+          updateMessages('user', input);          
+        }}
       >Send</button>
       <button className='send button'>Image</button>
-      <button className='clear button'>Clear</button>
+      <button 
+        className='clear button'
+        onClick={clearMessages}
+      >Clear</button>
       </>}
     </div>
   </div>)
