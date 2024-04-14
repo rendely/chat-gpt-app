@@ -1,7 +1,13 @@
 import {useState} from 'react';
 import './Inputs.css';
 
-function Inputs({setChats}){
+function Inputs({configs, updateConfigs}){
+
+  function updateMessages(message){
+    updateConfigs({...configs, messages: [...configs.messages, {
+      role: 'user', content: 'hello there'
+    }]})
+  }
 
   const [input, setInput] = useState('')
 
@@ -15,9 +21,7 @@ function Inputs({setChats}){
       {input === '' ? null : <>
       <button 
         className='send button'
-        onClick={() => setChats(curr => [...curr, {
-          role: 'user', content: 'hello there'
-        }])}
+        onClick={() => updateMessages('Hello there')}
       
       >Send</button>
       <button className='send button'>Image</button>

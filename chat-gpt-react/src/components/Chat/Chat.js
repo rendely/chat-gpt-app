@@ -2,10 +2,10 @@ import React from 'react';
 import './Chat.css';
 import Message from './Message/Message'
 
-function Chat({chats}){
+function Chat({messages}){
   
   return (<div className='Chat'>
-    {chats.map((m,i) => <Message key={i} role={m.role} content={m.content} />)}
+    {messages.map((m,i) => <Message key={i} role={m.role} content={m.content} />)}
   </div>)
 }
 
