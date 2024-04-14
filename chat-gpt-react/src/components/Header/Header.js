@@ -11,9 +11,9 @@ function Header({configs, updateConfigs}){
       <div className='top' onClick={() => setShowConfig(curr => !curr)}>
         <div className='side'></div>
         <div className='center'>
-        {showConfig? <span>Settings </span>: null}
+        {/* {showConfig? <span>Settings </span>: null} */}
         </div>
-        <div className='side'>⚙️</div>
+        <div className='side'>Settings</div>
       </div>
       
       <Config showConfig={showConfig} configs={configs} updateConfigs={updateConfigs}/>
