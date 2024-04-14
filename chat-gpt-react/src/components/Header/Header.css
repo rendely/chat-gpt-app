@@ -1,0 +1,23 @@
+.top{
+    font-size: 1.3rem;
+    height: 100%;
+    position:sticky;
+    top: 0;
+    display: flex;
+    flex-flow: row;
+}
+
+.center{
+    display: flex;
+    flex-grow: 10;
+    justify-content: center;
+    align-items: center;
+}
+
+.side{
+    display: flex;
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 2.3rem;
+    justify-content: right;
+}

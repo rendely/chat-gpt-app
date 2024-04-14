@@ -1,0 +1,18 @@
+.Option{
+   background-color: rgb(42, 42, 42);
+   width: 200px;
+   padding: 10px;
+   text-align: center;
+   border-radius: 8px;
+   color: gray;
+}
+
+
+.Option:hover{
+    background-color: rgb(55, 47, 62);
+}
+
+.selected{
+    background-color: rgb(208, 208, 208);
+    color: black;
+}

@@ -1,0 +1,44 @@
+.Config{
+    display: flex;    
+    flex-flow: column;
+    position: absolute;
+    left: 0;    
+    height: 100vh;
+    width: 100%;
+    z-index: 2;
+    background-color: rgb(80,80,80);
+    align-items: center;
+    justify-content:center;    
+    transition: height 0.3s;
+}
+
+.Config.close{
+    height: 0;
+}
+
+.row{
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+@media (min-width: 800px) {
+    .row {
+      flex-flow: row;
+    }
+  }
+
+.row.heading{
+    margin-bottom: 10px
+}
+.row+.row.heading{
+    margin-top: 30px;
+}
+
+.input{
+    width: auto;
+    color: rgb(40,40,40)
+}

@@ -1,0 +1,29 @@
+.Message{
+    text-align: left;
+    width: 100%;
+    animation-name: slide-up;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes slide-up {
+    from {transform:translateY(300%); opacity: 0;}
+    to {transform:translateY(0); opacity: 100;}
+  }
+
+.Message+.Message{
+    margin-top: 30px;
+}
+.content{
+    font-size: 1.3rem;
+    white-space: pre-line;
+}
+
+.role{
+    color: rgb(150,150,150)
+}
+
+img{
+    width: 80%;
+    max-width: 400px;
+}
