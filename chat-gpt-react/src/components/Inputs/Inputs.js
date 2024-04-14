@@ -115,12 +115,16 @@ function Inputs({configs, updateConfigs, updateLiveReply}){
       <button 
         className='send button'
         onClick={() => {
-          updateMessages([{role: 'user', content: input}]);          
+          updateMessages([{role: 'user', content: input}]);
+          inputRef.current.blur();          
         }}
       >Send</button>
       <button 
         className='send button'
-        onClick={handleImage}
+        onClick={() => {
+          handleImage();
+          inputRef.current.blur();
+        }}
         >Image</button>
       <button 
         className='clear button'
