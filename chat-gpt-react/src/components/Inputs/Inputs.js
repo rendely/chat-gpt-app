@@ -50,7 +50,7 @@ function Inputs({configs, updateConfigs, updateLiveReply}){
         let payload = JSON.parse(data);
         payload.forEach(p => {
           let text = p.choices[0].delta.content;
-          if (text !== undefined && text !== "\n") {
+          if (text !== undefined) {
             reply += text;
             updateLiveReply(reply);
           }
