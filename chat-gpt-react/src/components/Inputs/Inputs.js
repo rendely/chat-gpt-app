@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import './Inputs.css';
 
-function Inputs(){
+function Inputs({setChats}){
 
   const [input, setInput] = useState('')
 
@@ -13,7 +13,13 @@ function Inputs(){
     </textarea>
     <div className={`buttons ${input === '' ? 'close' : ''}`}>
       {input === '' ? null : <>
-      <button className='send button'>Send</button>
+      <button 
+        className='send button'
+        onClick={() => setChats(curr => [...curr, {
+          role: 'user', content: 'hello there'
+        }])}
+      
+      >Send</button>
       <button className='send button'>Image</button>
       <button className='clear button'>Clear</button>
       </>}

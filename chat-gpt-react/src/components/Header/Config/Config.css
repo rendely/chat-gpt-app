@@ -24,6 +24,12 @@
     justify-content: center;
 }
 
+@media (min-width: 800px) {
+    .row {
+      flex-flow: row;
+    }
+  }
+
 .row+.row{
     margin-top: 30px;
 }
