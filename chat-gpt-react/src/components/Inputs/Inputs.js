@@ -71,7 +71,33 @@ function Inputs({configs, updateConfigs, updateLiveReply}){
     source.stream();
 
 
-  }, [configs.messages])
+  }, [configs.key])
+
+  function handleImage() {
+    updateMessages('user', 'Generate image of ' + input);
+    // updateMessages('assistant', 'Working on it...');
+
+
+    fetch('https://api.openai.com/v1/images/generations', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: configs.key,
+      },
+      body: JSON.stringify({
+        "model": "dall-e-3",
+        "prompt": input,
+        "n": 1,
+        "size": "1024x1024"
+      })
+    })
+      .then(r => r.json())
+      .then(d => {
+        updateMessages('assistant',d['data'][0]['revised_prompt']);
+        // updateMessages('assistant',d['data'][0]['url']);
+      });
+
+  }
 
   return (<div className='Inputs'>
     <textarea 
@@ -89,7 +115,10 @@ function Inputs({configs, updateConfigs, updateLiveReply}){
           updateMessages('user', input);          
         }}
       >Send</button>
-      <button className='send button'>Image</button>
+      <button 
+        className='send button'
+        onClick={handleImage}
+        >Image</button>
       <button 
         className='clear button'
         onClick={clearMessages}
