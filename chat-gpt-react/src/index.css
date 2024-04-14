@@ -14,10 +14,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body, textarea, button{
+body, textarea, input, button{
   color: rgb(220, 220, 220);
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
   monospace;
+  border: none;
+  outline: none;
+  font-size: 1rem;
 }
 
 .root{
