@@ -10,7 +10,7 @@ function Inputs({configs, updateConfigs, updateLiveReply}){
   function updateMessages(newMessages){
     updateConfigs({...configs, messages: [...configs.messages, ...newMessages]});
     setInput('');
-    inputRef.current.focus()
+    
   }
 
   function clearMessages(){
