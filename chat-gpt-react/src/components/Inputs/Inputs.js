@@ -107,6 +107,7 @@ function Inputs({configs, updateConfigs, updateLiveReply}){
       autoFocus
       className='inputText' 
       value={input}
+      placeholder='How can I help?'
       onChange={e => setInput(e.target.value)}>      
     </textarea>
     <div className={`buttons ${input === '' && configs.messages.length === 1 ? 'close' : ''}`}>
