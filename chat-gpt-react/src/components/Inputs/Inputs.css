@@ -67,7 +67,9 @@
 
 }
 
-
+.button:focus{
+  background-color: rgb(55, 47, 62);
+}
 
 
 .button+.button{
