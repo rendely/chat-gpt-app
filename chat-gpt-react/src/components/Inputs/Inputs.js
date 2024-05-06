@@ -1,11 +1,18 @@
 import { SSE } from 'sse.js';
 import { useEffect, useState, useRef } from 'react';
+import { useKeyboardShortcuts } from '../../useKeyboardShortcuts';
 import './Inputs.css';
 
 function Inputs({configs, updateConfigs, updateLiveReply}){
 
+  const inputRef = useRef();
+
+  //keyboard shortcuts
+  const keyboardShortcut = useKeyboardShortcuts();
   
-  const inputRef = useRef()
+  useEffect(() => {
+    if (keyboardShortcut === 'clear') clearMessages()
+  }, [keyboardShortcut]);
 
   function updateMessages(newMessages){
     updateConfigs({...configs, messages: [...configs.messages, ...newMessages]});
