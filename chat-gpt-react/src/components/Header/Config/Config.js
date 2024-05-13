@@ -1,8 +1,22 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Option from './Option/Option'
 import './Config.css';
+import { useKeyboardShortcuts } from '../../../useKeyboardShortcuts';
 
 function Config({showConfig, configs, updateConfigs}){
+
+  //keyboard shortcuts
+  const keyboardShortcut = useKeyboardShortcuts();
+  
+  useEffect(() => {
+    if (keyboardShortcut === 'model') {
+      
+      if (configs.model === 'gpt-4-turbo-preview')
+        handleModelChange('gpt-3.5-turbo')
+      else
+        handleModelChange('gpt-4-turbo-preview')
+    }
+  }, [keyboardShortcut]);
 
   function handleModelChange(model){
     updateConfigs({model: model});

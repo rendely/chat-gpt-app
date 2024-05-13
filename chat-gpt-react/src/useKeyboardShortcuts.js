@@ -9,6 +9,11 @@ export function useKeyboardShortcuts() {
             setUpdate((u) => 'clear' )
             setTimeout(() => setUpdate(null),1000)
         }
+
+        if (e.key === 'm' && e.ctrlKey){
+            setUpdate((u) => 'model' )
+            setTimeout(() => setUpdate(null),1000)
+        }
     }
 
     useEffect(() => {
