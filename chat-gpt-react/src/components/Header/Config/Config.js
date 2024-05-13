@@ -11,10 +11,10 @@ function Config({showConfig, configs, updateConfigs}){
   useEffect(() => {
     if (keyboardShortcut === 'model') {
       
-      if (configs.model === 'gpt-4-turbo-preview')
+      if (configs.model === 'gpt-4o')
         handleModelChange('gpt-3.5-turbo')
       else
-        handleModelChange('gpt-4-turbo-preview')
+        handleModelChange('gpt-4o')
     }
   }, [keyboardShortcut]);
 
@@ -44,8 +44,8 @@ function Config({showConfig, configs, updateConfigs}){
           handleClick={() => handleModelChange('gpt-3.5-turbo')}
         />
         <Option 
-          option={{name: 'Chat GPT 4 Vision', selected: configs.model === 'gpt-4-turbo-preview'}} 
-          handleClick={() => handleModelChange('gpt-4-turbo-preview')}
+          option={{name: 'Chat GPT 4 Vision', selected: configs.model === 'gpt-4o'}} 
+          handleClick={() => handleModelChange('gpt-4o')}
         />
       </div>
     </>
