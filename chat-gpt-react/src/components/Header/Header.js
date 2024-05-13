@@ -11,6 +11,7 @@ function Header({configs, updateConfigs}){
       <div className='top' onClick={() => setShowConfig(curr => !curr)}>
         <div className='side'></div>
         <div className='center'>
+          {configs.model}
         {/* {showConfig? <span>Settings </span>: null} */}
         </div>
         <div className='side'>Settings</div>

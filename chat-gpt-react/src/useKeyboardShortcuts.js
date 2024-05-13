@@ -7,12 +7,12 @@ export function useKeyboardShortcuts() {
     function handleKeydown(e){
         if (e.key === 'c' && e.ctrlKey){
             setUpdate((u) => 'clear' )
-            setTimeout(() => setUpdate(null),1000)
+            setTimeout(() => setUpdate(null),300)
         }
 
         if (e.key === 'm' && e.ctrlKey){
             setUpdate((u) => 'model' )
-            setTimeout(() => setUpdate(null),1000)
+            setTimeout(() => setUpdate(null),300)
         }
     }
 

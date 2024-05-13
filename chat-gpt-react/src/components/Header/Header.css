@@ -1,8 +1,9 @@
 .top{
-    font-size: 1.3rem;
+    font-size: 1rem;
     height: 100%;
     position:sticky;
     top: 0;
+    color: rgb(97, 97, 97);
     display: flex;
     flex-flow: row;
 }
@@ -12,12 +13,12 @@
     flex-grow: 10;
     justify-content: center;
     align-items: center;
+    
 }
 
 .side{
     display: flex;
     flex-grow: 1;
     padding: 10px;
-    font-size: 1rem;
     justify-content: right;
 }
