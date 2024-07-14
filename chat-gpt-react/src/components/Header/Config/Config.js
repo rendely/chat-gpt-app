@@ -60,4 +60,3 @@ function Config({showConfig, configs, updateConfigs}){
 }
 
 export default Config
-
