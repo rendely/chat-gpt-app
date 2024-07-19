@@ -12,6 +12,8 @@ function Config({showConfig, configs, updateConfigs}){
     if (keyboardShortcut === 'model') {
       
       if (configs.model === 'gpt-4o')
+        handleModelChange('gpt-4o-mini')
+      else if (configs.model === 'gpt-4o-mini')
         handleModelChange('gpt-3.5-turbo')
       else
         handleModelChange('gpt-4o')
@@ -42,6 +44,10 @@ function Config({showConfig, configs, updateConfigs}){
         <Option 
           option={{name: 'Chat GPT 3.5', selected: configs.model === 'gpt-3.5-turbo'}} 
           handleClick={() => handleModelChange('gpt-3.5-turbo')}
+        />
+        <Option 
+          option={{name: 'Chat GPT 4o- Mini', selected: configs.model === 'gpt-4o-mini'}} 
+          handleClick={() => handleModelChange('gpt-4o-mini')}
         />
         <Option 
           option={{name: 'Chat GPT 4 Vision', selected: configs.model === 'gpt-4o'}} 
