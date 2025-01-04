@@ -21,7 +21,7 @@ function Inputs({configs, updateConfigs, updateLiveReply}){
   }
 
   function clearMessages(){
-    updateConfigs({...configs, messages: configs.messages.slice(0,1)});
+    updateConfigs({...configs, messages: []});
     setInput('');
     inputRef.current.focus()
   }
@@ -30,7 +30,7 @@ function Inputs({configs, updateConfigs, updateLiveReply}){
 
   useEffect(() => {
     let reply = '';
-    if (configs.messages.length < 2) return
+    if (configs.messages.length < 1) return
     if (configs.messages[configs.messages.length -1].role !== 'user') return
 
     updateMessages([{role:'assistant', content:'...'}]);
