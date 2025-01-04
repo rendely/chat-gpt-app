@@ -38,7 +38,7 @@ export default function App() {
         return localConfigs;
       }
       else{
-        return {model: 'gpt-3.5-turbo', messages: [{role: 'system', content: 'You are a concise, helpful assistant'}]}
+        return {model: 'gpt-4o-mini', messages: [{role: 'system', content: 'You are a concise, helpful assistant'}]}
       }
     }
 
