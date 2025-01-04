@@ -50,8 +50,8 @@ function Config({showConfig, configs, updateConfigs}){
           handleClick={() => handleModelChange('gpt-4o')}
         />
         <Option 
-          option={{name: 'o1', selected: configs.model === 'o1'}} 
-          handleClick={() => handleModelChange('o1')}
+          option={{name: 'o1 preview', selected: configs.model === 'o1-preview'}} 
+          handleClick={() => handleModelChange('o1-preview')}
         />
         <Option 
           option={{name: 'o1 mini', selected: configs.model === 'o1-mini'}} 
