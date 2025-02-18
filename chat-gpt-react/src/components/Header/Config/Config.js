@@ -1,65 +1,55 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Option from './Option/Option'
 import './Config.css';
 import { useKeyboardShortcuts } from '../../../useKeyboardShortcuts';
 
-function Config({showConfig, configs, updateConfigs}){
+function Config({ showConfig, configs, updateConfigs }) {
 
-  //keyboard shortcuts
+  const models = ['gpt-4o', 'gpt-4o-mini', 'o1', 'o1-mini', 'o3-mini'];
+
   const keyboardShortcut = useKeyboardShortcuts();
-  
+
   useEffect(() => {
     if (keyboardShortcut === 'model') {
-      
-      if (configs.model === 'gpt-4o')
-        handleModelChange('gpt-4o-mini')
-      else if (configs.model === 'gpt-4o-mini')
-        handleModelChange('gpt-4o')
-      else
-        handleModelChange('gpt-4o-mini')
+
+      const currentIndex = models.indexOf(configs.model);
+      const nextModel = models[(currentIndex + 1) % models.length];
+      handleModelChange(nextModel);
+
     }
   }, [keyboardShortcut]);
 
-  function handleModelChange(model){
-    updateConfigs({model: model});
+  function handleModelChange(model) {
+    updateConfigs({ model: model });
   }
 
-  function handleKeyChange(key){
-    updateConfigs({key: key});
+  function handleKeyChange(key) {
+    updateConfigs({ key: key });
   }
 
 
-  return (<div className={`Config ${showConfig? null :'close'}`}>
-    {showConfig? 
-    <>
-      <div className='row heading'>Your ChatGPT API key: </div>
-      <div className='row'>
-        <input 
-          className='input' 
-          onChange={(e) => handleKeyChange(e.target.value)}
-          value={configs.key} />
-      </div>
-      <div className='row heading'>Model:</div>
-      <div className='row'>
-        <Option 
-          option={{name: 'Chat 4o mini', selected: configs.model === 'gpt-4o-mini'}} 
-          handleClick={() => handleModelChange('gpt-4o-mini')}
-        />
-        <Option 
-          option={{name: 'Chat GPT 4o', selected: configs.model === 'gpt-4o'}} 
-          handleClick={() => handleModelChange('gpt-4o')}
-        />
-        <Option 
-          option={{name: 'o1 preview', selected: configs.model === 'o1-preview'}} 
-          handleClick={() => handleModelChange('o1-preview')}
-        />
-        <Option 
-          option={{name: 'o1 mini', selected: configs.model === 'o1-mini'}} 
-          handleClick={() => handleModelChange('o1-mini')}
-        />
-      </div>
-    </>
-  :null}
+  return (<div className={`Config ${showConfig ? null : 'close'}`}>
+    {showConfig ?
+      <>
+        <div className='row heading'>Your ChatGPT API key: </div>
+        <div className='row'>
+          <input
+            className='input'
+            onChange={(e) => handleKeyChange(e.target.value)}
+            value={configs.key} />
+        </div>
+        <div className='row heading'>Model:</div>
+        <div className='row'>
+          {models.map((model) => (
+            <Option
+              key={model}
+              option={{ name: model, selected: configs.model === model }}
+              handleClick={() => handleModelChange(model)}
+            />
+          ))}
+        </div>
+      </>
+      : null}
   </div>)
 }
 

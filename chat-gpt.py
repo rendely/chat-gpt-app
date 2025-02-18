@@ -10,6 +10,8 @@ messages = [
 {"role": "system", "content": "You are a helpful, concise assistant."}, 
 ]
 
+model = 'gpt-4o-mini'
+
 intro = """
   ______    __    __       __  ___________  _______    _______  ___________  
  /" _  "\  /" |  | "\     /""\("     _   ")/" _   "|  |   __ "\("     _   ") 
@@ -19,7 +21,8 @@ intro = """
 (:   _) \ (:  (  )  :)/   /  \\  \\:  |   (:   _(  _|/|__/ \       \:  |     
  \_______) \__|  |__/(___/    \___)\__|    \_______)(_______)       \__|     
                                                                              
-\n\n"""
+\n\nmodel: """
+intro += model + "\n\n"
 print(intro)                                                                             
 
 while True:
@@ -38,7 +41,7 @@ while True:
     "Authorization": auth_token
   }
   data = {
-    "model": "gpt-4o-mini",
+    "model": model,
     "messages": messages,
     "stream": True
   }
