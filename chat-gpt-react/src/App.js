@@ -38,7 +38,7 @@ export default function App() {
         return localConfigs;
       }
       else{
-        return {model: 'gpt-4o-mini', messages: []}
+        return {model: 'gpt-4.1', messages: []}
       }
     }
 
