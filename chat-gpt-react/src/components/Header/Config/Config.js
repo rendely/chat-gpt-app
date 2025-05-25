@@ -5,7 +5,7 @@ import { useKeyboardShortcuts } from '../../../useKeyboardShortcuts';
 
 function Config({ showConfig, configs, updateConfigs }) {
 
-  const models = ['gpt-4o', 'gpt-4o-mini', 'o1', 'o1-mini', 'o3-mini'];
+  const models = ['gpt-4.1', 'gpt-4.1-mini', 'o1', 'o3','o4-mini'];
 
   const keyboardShortcut = useKeyboardShortcuts();
 
