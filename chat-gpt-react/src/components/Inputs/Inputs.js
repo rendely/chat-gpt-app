@@ -92,7 +92,7 @@ function Inputs({configs, updateConfigs, updateLiveReply}){
         Authorization: configs.key,
       },
       body: JSON.stringify({
-        "model": "gpt-image-1",
+        "model": "dall-e-3",
         "prompt": input,
         "n": 1,
         "size": "1024x1024"
